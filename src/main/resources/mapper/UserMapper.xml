@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jmlee.community.dao.UserMapper">
+    
+    <resultMap id="BaseResultMap" type="com.jmlee.community.entity.User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="salt" property="salt"/>
+        <result column="email" property="email"/>
+        <result column="type" property="type"/>
+        <result column="status" property="status"/>
+        <result column="activation_code" property="activationCode"/>
+        <result column="header_url" property="headerUrl"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <sql id="selectFields">
+        id,username,password,salt,email,type,status,activation_code,header_url,create_time
+    </sql>
+
+    <sql id="InsertFields">
+        username,password,salt,email,type,status,activation_code,header_url,create_time
+    </sql>
+
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="selectFields"/>
+        from user
+        where id = #{id}
+    </select>
+
+    <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="selectFields"/>
+        from user
+        where username = #{username}
+    </select>
+
+    <select id="selectByEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="selectFields"/>
+        from user
+        where email = #{email}
+    </select>
+
+    <insert id="insertUser" keyColumn="id" keyProperty="id" parameterType="com.jmlee.community.entity.User" useGeneratedKeys="true">
+    insert into user
+        (<include refid="InsertFields"/>)
+    values
+        (#{username},#{password},#{salt},#{email},#{type},
+         #{status},#{activationCode},#{headerUrl},#{createTime})
+    </insert>
+
+    <update id="updateStatus">
+        update user set status = #{status} where id = #{id}
+    </update>
+
+    <update id="updateHeader">
+        update user set header_url = #{headerUrl} where id = #{id}
+    </update>
+
+    <update id="updatePassword">
+        update user set password = #{password} where id = #{id} ;
+    </update>
+
+</mapper>
