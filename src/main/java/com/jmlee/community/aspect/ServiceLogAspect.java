@@ -36,7 +36,7 @@ public class ServiceLogAspect {
 
         String targetMethod = joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName();
 
-        logger.info(String.format("用户:[%s],在[%s]访问了[%s]方法."),ip,now,targetMethod);
+        logger.info(String.format("用户:[%s],在[%s]访问了[%s]方法.",ip,now,targetMethod));
     }
 
 }
