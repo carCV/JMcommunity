@@ -1,6 +1,8 @@
 package com.jmlee.community.service;
 
+import com.jmlee.community.dao.LoginTicketMapper;
 import com.jmlee.community.dao.UserMapper;
+import com.jmlee.community.entity.LoginTicket;
 import com.jmlee.community.entity.User;
 import com.jmlee.community.util.CommunityUtil;
 import com.jmlee.community.util.MailClient;
@@ -27,6 +29,9 @@ public class UserService {
     @Autowired
     private TemplateEngine templateEngine;
 
+    @Autowired
+    private LoginTicketMapper loginTicketMapper;
+
     @Value("${community.path.domain}")
     private String domain;
 
@@ -52,12 +57,10 @@ public class UserService {
             map.put("usernameMsg","账号不能为空！");
             return map;
         }
-
         if (StringUtils.isBlank(user.getPassword())) {
             map.put("passwordMsg","密码不能为空！");
             return map;
         }
-
         if (StringUtils.isBlank(user.getEmail())) {
             map.put("emailMsg","邮箱不能为空！");
             return map;
@@ -98,6 +101,53 @@ public class UserService {
         mailClient.sendMail(user.getEmail(),"激活账号", content);
 
         return map;
+    }
+
+    public Map<String, Object> login(String username, String password, Integer expiredSeconds) {
+
+        Map<String, Object> map = new HashMap<>();
+
+        // 空值处理
+        if (StringUtils.isBlank(username)) {
+            map.put("usernameMsg","账号不能为空！");
+            return map;
+        }
+        if (StringUtils.isBlank(password)) {
+            map.put("passwordMsg","密码不能为空！");
+            return map;
+        }
+
+        // 验证状态
+        User user = userMapper.selectByName(username);
+        if (user == null) {
+            map.put("usernameMsg","该账号不存在！");
+            return map;
+        }
+        if (user.getStatus() == 1) {
+            map.put("usernameMsg","该账号未激活！");
+            return map;
+        }
+
+        // 验证密码
+        password = CommunityUtil.md5(password + user.getSalt());
+        if (!user.getPassword().equals(password)) {
+            map.put("passwordMsg","密码不正确！");
+            return map;
+        }
+
+        // 生成登录凭证
+        LoginTicket loginTicket = new LoginTicket();
+        loginTicket.setUserId(user.getId());
+        loginTicket.setTicket(CommunityUtil.generateUUID());
+        loginTicket.setStatus(0);
+        loginTicket.setExpired(new Date(System.currentTimeMillis() + expiredSeconds * 1000));
+
+        loginTicketMapper.insertLoginTicket(loginTicket);
+
+        map.put("ticket",loginTicket.getTicket());
+
+        return map;
+
     }
 
 }

@@ -11,10 +11,10 @@ public interface UserMapper {
     User selectByName(String username);
     User selectByEmail(String email);
 
-    int insertUser(User user);
-    int updateStatus(@Param("id") Integer id,@Param("status") Integer status);
-    int updateHeader(@Param("id") Integer id, @Param("headerUrl") String headerUrl);
-    int updatePassword(@Param("id") Integer id, @Param("password") String password);
+    Integer insertUser(User user);
+    Integer updateStatus(@Param("id") Integer id,@Param("status") Integer status);
+    Integer updateHeader(@Param("id") Integer id, @Param("headerUrl") String headerUrl);
+    Integer updatePassword(@Param("id") Integer id, @Param("password") String password);
 
 
 }

@@ -29,7 +29,7 @@ spring:
   mail:
     host: smtp.qq.com
     port: 465
-    username: 2607687789@qq.com
+    username: 2607687789@qq.com  # 最后提交需修改账号
     password: sroswaseznzyeaje
     protocol: smtps
     properties:
@@ -60,6 +60,6 @@ logging:
     com.jmlee.community.dao: debug
 
 
-community
-  path
+community:
+  path:
     domain: http://localhost:8030
