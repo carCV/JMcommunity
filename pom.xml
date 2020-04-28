@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.jmlee</groupId>
-    <artifactId>JMcommunity</artifactId>
+    <artifactId>community</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <description>forum system</description>
 
