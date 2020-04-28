@@ -103,7 +103,14 @@ public class UserService {
         return map;
     }
 
-    public Map<String, Object> login(String username, String password, Integer expiredSeconds) {
+    /**
+     * 处理登录逻辑
+     * @param username
+     * @param password
+     * @param expiredSeconds
+     * @return
+     */
+    public Map<String, Object> login(String username, String password, int expiredSeconds) {
 
         Map<String, Object> map = new HashMap<>();
 
@@ -148,6 +155,24 @@ public class UserService {
 
         return map;
 
+    }
+
+    /**
+     * 退出登录-修改登录凭证
+     * @param ticket
+     */
+    public void logout(String ticket) {
+        // status-1:表示无效
+        loginTicketMapper.updateStatus(ticket,1);
+    }
+
+    /**
+     * 根据凭证查询用户登录状态信息
+     * @param ticket
+     * @return
+     */
+    public LoginTicket findLoginTicket(String ticket) {
+        return loginTicketMapper.selectByTicket(ticket);
     }
 
 }

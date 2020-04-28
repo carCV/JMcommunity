@@ -45,7 +45,7 @@ public class LoginController implements CommunityConstant {
     }
 
     /**
-     * 注册账号
+     * 注册账号处理
      * @param model
      * @param user
      * @return
@@ -58,6 +58,7 @@ public class LoginController implements CommunityConstant {
         if (map == null || map.isEmpty()) {
             model.addAttribute("msg","注册成功，我们已向您的注册邮箱发送一封激活邮件，请尽快激活！");
             model.addAttribute("target","/index");
+            //转发到中间处理页面
             return "/site/operate-result";
         } else {
             model.addAttribute("username",map.get("usernameMsg"));
@@ -75,7 +76,7 @@ public class LoginController implements CommunityConstant {
     }
 
     /**
-     * 登录请求
+     * 登录请求处理
      * @param username
      * @param password
      * @param code 验证码
@@ -86,10 +87,10 @@ public class LoginController implements CommunityConstant {
      * @return
      */
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public String login(String username, String password, String code, Boolean rememberme,
+    public String login(String username, String password, String code, boolean rememberme,
                         Model model, HttpSession session, HttpServletResponse response) {
 
-        String kaptcha = (String)session.getAttribute("kaptcha");
+        String kaptcha = (String) session.getAttribute("kaptcha");
         // 先检查验证码（避免一上来就去查询数据库）
         if (StringUtils.isBlank(kaptcha) || StringUtils.isBlank(code) || !kaptcha.equalsIgnoreCase(code)) {
             model.addAttribute("codeMsg","验证码不正确！");
@@ -97,22 +98,27 @@ public class LoginController implements CommunityConstant {
         }
 
         // 再检查账号，密码
-        Integer expiredSeconds = rememberme ? REMEMBER_EXPIRED_SECONDS : DEFAULT_EXPIRED_SECONDS;
+        int expiredSeconds = (rememberme ? REMEMBER_EXPIRED_SECONDS : DEFAULT_EXPIRED_SECONDS);
         Map<String, Object> map = userService.login(username, password, expiredSeconds);
         if (map.containsKey("ticket")) {
-            Cookie cookie = new Cookie("ticket",map.get("ticket").toString());
+            Cookie cookie = new Cookie("ticket", map.get("ticket").toString());
             cookie.setPath(contextPath);
             cookie.setMaxAge(expiredSeconds);
             response.addCookie(cookie);
             return "redirect:/index";
         } else {
-            model.addAttribute("usernameMsg",map.get("usernameMsg"));
-            model.addAttribute("passwordMsg",map.get("passwordMsg"));
+            model.addAttribute("usernameMsg", map.get("usernameMsg"));
+            model.addAttribute("passwordMsg", map.get("passwordMsg"));
             return "/site/login";
         }
     }
 
 
+    /**
+     * 给前端返回Kaptcha验证码
+     * @param response
+     * @param session
+     */
     @RequestMapping(path = "/kaptcha", method = RequestMethod.GET)
     public void getKaptcha(HttpServletResponse response, HttpSession session) {
 
@@ -133,5 +139,10 @@ public class LoginController implements CommunityConstant {
         }
     }
 
+    @RequestMapping(path = "/logout", method = RequestMethod.GET)
+    public String logout(@CookieValue("ticket") String ticket) {
+        userService.logout(ticket);
+        return "redirect:/login";
+    }
 
 }
