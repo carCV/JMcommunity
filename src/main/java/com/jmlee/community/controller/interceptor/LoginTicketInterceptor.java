@@ -42,7 +42,8 @@ public class LoginTicketInterceptor implements HandlerInterceptor {
 
             }
         }
-        return false;
+        // 这里记得放行，很容易忽略
+        return true;
     }
 
     // 在controller之后，模板引擎渲染之前调用

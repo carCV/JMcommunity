@@ -175,4 +175,14 @@ public class UserService {
         return loginTicketMapper.selectByTicket(ticket);
     }
 
+
+    /**
+     * 更新用户头像
+     * @param userId
+     * @param headerUrl
+     * @return
+     */
+    public Integer updateHeader(Integer userId, String headerUrl) {
+        return userMapper.updateHeader(userId, headerUrl);
+    }
 }

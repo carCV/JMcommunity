@@ -63,3 +63,4 @@ logging:
 community:
   path:
     domain: http://localhost:8030
+    upload: F:/Java_Test/data/uploadData
