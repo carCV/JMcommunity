@@ -5,7 +5,7 @@ server:
 
 spring:
   application:
-    name: community-demo
+    name: forum-system
 
   datasource:
     type: com.zaxxer.hikari.HikariDataSource

@@ -9,10 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.jmlee</groupId>
-    <artifactId>community</artifactId>
+    <artifactId>JMcommunity</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>community</name>
-    <description>community-demo</description>
+    <description>forum system</description>
 
     <properties>
         <java.version>1.8</java.version>
