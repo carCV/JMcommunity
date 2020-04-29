@@ -4,6 +4,7 @@ import com.jmlee.community.dao.LoginTicketMapper;
 import com.jmlee.community.dao.UserMapper;
 import com.jmlee.community.entity.LoginTicket;
 import com.jmlee.community.entity.User;
+import com.jmlee.community.util.CommunityConstant;
 import com.jmlee.community.util.CommunityUtil;
 import com.jmlee.community.util.MailClient;
 import org.apache.commons.lang3.StringUtils;
@@ -19,7 +20,7 @@ import java.util.Map;
 import java.util.Random;
 
 @Service
-public class UserService {
+public class UserService implements CommunityConstant {
     @Autowired
     private UserMapper userMapper;
 
@@ -83,24 +84,43 @@ public class UserService {
         // 注册用户
         user.setSalt(CommunityUtil.generateUUID().substring(0,5));
         user.setPassword(CommunityUtil.md5(user.getPassword() + user.getSalt()));
-        user.setType(0); // 0 表示普通用户
-        user.setStatus(0);  // 0 表示还未激活
+        user.setType(0);   // 0 示普通用户
+        user.setStatus(0);  // 0表示还未激活，1表示已激活
         user.setActivationCode(CommunityUtil.generateUUID());
         // 设置随机头像路径
         user.setHeaderUrl(String.format("http://images.nowcoder.com/head/%dt.png",new Random().nextInt(1000)));
         user.setCreateTime(new Date());
         userMapper.insertUser(user);
 
-        // 激活邮箱
+        // 发送激活邮箱
         Context context = new Context();
         context.setVariable("email",user.getEmail());
         // http://localhost:8030/community/activation/id/code
         String url = domain + contextPath + "/activation/" + user.getId() + "/" + user.getActivationCode();
         context.setVariable("url",url);
-        String content = templateEngine.process("/mail/activation",context);
-        mailClient.sendMail(user.getEmail(),"激活账号", content);
+        String content = templateEngine.process("/mail/activation", context);
+        mailClient.sendMail(user.getEmail(),"激活极米账号", content);
 
         return map;
+    }
+
+    /**
+     * 激活账号
+     * @param userId
+     * @param code
+     * @return
+     */
+    public int activation(int userId, String code) {
+        User user = userMapper.selectById(userId);
+        if (user.getStatus() == 1) {
+            // 重复激活
+            return ACTIVATION_REPEAT;
+        } else if (code.equals(user.getActivationCode())) {
+            userMapper.updateStatus(userId,1);
+            return ACTIVATION_SUCCESS;
+        } else {
+            return ACTIVATION_FAILURE;
+        }
     }
 
     /**
@@ -185,4 +205,6 @@ public class UserService {
     public Integer updateHeader(Integer userId, String headerUrl) {
         return userMapper.updateHeader(userId, headerUrl);
     }
+
+
 }

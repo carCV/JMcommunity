@@ -12,8 +12,8 @@ public class User {
     private String password;
     private String salt;
     private String email;
-    private Integer type;
-    private Integer status;
+    private Integer type;  // 账户类型
+    private Integer status;  // 账户激活状态
     private String activationCode;
     private String headerUrl;
     private Date createTime;

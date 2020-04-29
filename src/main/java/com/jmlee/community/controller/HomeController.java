@@ -48,7 +48,7 @@ public class HomeController {
 
         model.addAttribute("discussPosts",discussPosts);
 
-        //当引入thymeleaf的jar包时 默认的静态根目录变成了templates
-        return "index";
+        // 当引入thymeleaf的jar包时，默认的静态根目录变成了templates
+        return "/index";
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -58,17 +59,44 @@ public class LoginController implements CommunityConstant {
         if (map == null || map.isEmpty()) {
             model.addAttribute("msg","注册成功，我们已向您的注册邮箱发送一封激活邮件，请尽快激活！");
             model.addAttribute("target","/index");
-            //转发到中间处理页面
+            // 当注册成功后，页面转发到中间处理页面
             return "/site/operate-result";
         } else {
-            model.addAttribute("username",map.get("usernameMsg"));
-            model.addAttribute("password",map.get("passwordMsg"));
-            model.addAttribute("email",map.get("emailMsg"));
+            model.addAttribute("usernameMsg",map.get("usernameMsg"));
+            model.addAttribute("passwordMsg",map.get("passwordMsg"));
+            model.addAttribute("emailMsg",map.get("emailMsg"));
             return "/site/register";
         }
 
     }
 
+    /**
+     * 激活账号
+     * @param model
+     * @param userId
+     * @param code
+     * @return
+     */
+    @RequestMapping(path = "/activation/{userId}/{code}", method = RequestMethod.GET)
+    public String activation(Model model,
+                             @PathVariable("userId") int userId,
+                             @PathVariable("code") String code) {
+        int result = userService.activation(userId, code);
+        if (result == ACTIVATION_SUCCESS) {
+            model.addAttribute("msg", "激活成功，您的账号已经可以正常使用了！");
+            model.addAttribute("target","/login");
+
+        } else if (result == ACTIVATION_REPEAT) {
+            model.addAttribute("msg", "无效操作，该账号已经激活过了！");
+            model.addAttribute("target","/index");
+
+        } else {
+            model.addAttribute("msg", "激活失败，您提供的激活码不正确！");
+            model.addAttribute("target","/index");
+        }
+
+        return "/site/operate-result";
+    }
 
     @RequestMapping(path = "/login", method = RequestMethod.GET)
     public String getLoginPage() {

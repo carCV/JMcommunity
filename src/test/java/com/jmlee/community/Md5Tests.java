@@ -13,7 +13,7 @@ public class Md5Tests {
     @Test
     public void testMd5() {
 
-        String s = CommunityUtil.md5("123456");
+        String s = CommunityUtil.md5("123456789");
         System.out.println(s);
 
     }

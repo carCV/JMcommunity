@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -57,13 +58,13 @@ public class MapperTests {
 
     @Test
     public void testUpdateUser() {
-        int rows = userMapper.updateStatus(150, 1);
+        int rows = userMapper.updateStatus(153, 1);
         System.out.println(rows);
 
-        rows = userMapper.updateHeader(150,"http://www.nowcoder.com/103.png");
+        rows = userMapper.updateHeader(153,"http://www.nowcoder.com/103.png");
         System.out.println(rows);
 
-        rows = userMapper.updatePassword(150, "helloNew");
+        rows = userMapper.updatePassword(153, "helloNew");
         System.out.println(rows);
     }
 

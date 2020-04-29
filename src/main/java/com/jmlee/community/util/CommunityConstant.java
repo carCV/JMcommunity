@@ -1,6 +1,8 @@
 package com.jmlee.community.util;
 
-
+/**
+ * 定义一个常量接口
+ */
 public interface CommunityConstant {
     /**
      * 激活成功
