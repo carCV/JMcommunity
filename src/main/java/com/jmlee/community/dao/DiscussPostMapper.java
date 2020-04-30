@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface DiscussPostMapper {
 
-    // 在首页时userId是不存在的，只有进入个人主页才需要userId，考虑用动态SQL
+    // 在首页未登录时userId是不存在的，只有进入个人主页才需要userId，考虑用动态SQL
     List<DiscussPost> selectDiscussPost(@Param("userId") int userId, @Param("offset") int offset, @Param("limit") int limit);
 
     // 查询帖子的总条数
