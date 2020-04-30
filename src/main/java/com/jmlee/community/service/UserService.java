@@ -150,7 +150,7 @@ public class UserService implements CommunityConstant {
             map.put("usernameMsg","该账号不存在！");
             return map;
         }
-        if (user.getStatus() == 1) {
+        if (user.getStatus() == 0) {
             map.put("usernameMsg","该账号未激活！");
             return map;
         }

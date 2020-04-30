@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +24,11 @@ public class HomeController {
 
     @Autowired
     private UserService userService;
+
+    @RequestMapping(path = "/", method = RequestMethod.GET)
+    public String root() {
+        return "forward:/index";
+    }
 
     @RequestMapping(path = "/index", method = RequestMethod.GET)
     public String getIndexPage(Model model, Page page) {

@@ -23,28 +23,28 @@
         username,password,salt,email,type,status,activation_code,header_url,create_time
     </sql>
 
-    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectById" parameterType="int" resultMap="BaseResultMap">
         select
         <include refid="selectFields"/>
         from user
         where id = #{id}
     </select>
 
-    <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="selectByName" parameterType="String" resultMap="BaseResultMap">
         select
         <include refid="selectFields"/>
         from user
         where username = #{username}
     </select>
 
-    <select id="selectByEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="selectByEmail" parameterType="String" resultMap="BaseResultMap">
         select
         <include refid="selectFields"/>
         from user
         where email = #{email}
     </select>
 
-    <insert id="insertUser" keyColumn="id" keyProperty="id" parameterType="com.jmlee.community.entity.User" useGeneratedKeys="true">
+    <insert id="insertUser" keyColumn="id" keyProperty="id" parameterType="User" useGeneratedKeys="true">
     insert into user
         (<include refid="InsertFields"/>)
     values

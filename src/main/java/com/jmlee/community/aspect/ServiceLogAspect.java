@@ -17,8 +17,8 @@ import java.util.Date;
 /**
  * 统一记录服务层日志切面
  */
-@Component
-@Aspect
+//@Component
+//@Aspect
 public class ServiceLogAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(ServiceLogAspect.class);

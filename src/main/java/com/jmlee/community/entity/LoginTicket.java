@@ -2,26 +2,29 @@ package com.jmlee.community.entity;
 
 import java.util.Date;
 
+/**
+ * 登录凭证实体类
+ */
 public class LoginTicket {
-    private Integer id;
-    private Integer userId;
+    private int id;
+    private int userId;
     private String ticket;
-    private Integer status;
+    private int status;
     private Date expired;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Integer getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -33,11 +36,11 @@ public class LoginTicket {
         this.ticket = ticket;
     }
 
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
