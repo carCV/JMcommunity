@@ -21,7 +21,7 @@ public class DiscussPostService {
         return discussPostMapper.selectDiscussPost(userId, offset, limit);
     }
 
-    public Integer findDiscussPostRows(int userId) {
+    public int findDiscussPostRows(int userId) {
         return discussPostMapper.selectDiscussPostRows(userId);
     }
 
@@ -30,7 +30,7 @@ public class DiscussPostService {
         return discussPostMapper.selectDiscussPostById(id);
     }
 
-    public Integer addDiscussPost(DiscussPost discussPost) {
+    public int addDiscussPost(DiscussPost discussPost) {
         if (discussPost == null) {
             throw new IllegalArgumentException("参数不能为空！");
         }
@@ -44,6 +44,11 @@ public class DiscussPostService {
         discussPost.setContent(sensitiveFilter.filter(discussPost.getContent()));
 
         return discussPostMapper.insertDiscussPost(discussPost);
-
     }
+
+    public int updateCommentCount(int id, int commentCount) {
+        return discussPostMapper.updateCommentCount(id,commentCount);
+    }
+
+
 }

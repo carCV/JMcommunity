@@ -12,7 +12,7 @@ public interface LoginTicketMapper {
             "values (#{userId}, #{ticket}, #{status}, #{expired}) "
     })
     @Options(useGeneratedKeys = true, keyProperty = "id") // 自动生成主键
-    Integer insertLoginTicket(LoginTicket loginTicket);
+    int insertLoginTicket(LoginTicket loginTicket);
 
     // 查询凭证
     @Select({
@@ -26,5 +26,5 @@ public interface LoginTicketMapper {
     @Update({
             "update login_ticket set status=#{status} where ticket=#{ticket} "
     })
-    Integer updateStatus(@Param("ticket") String ticket, @Param("status") Integer status);
+    int updateStatus(@Param("ticket") String ticket, @Param("status") Integer status);
 }

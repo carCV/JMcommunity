@@ -25,6 +25,12 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Map;
 
+/**
+ * @Description TODO
+ * @Author jmlee
+ * @Date 2020/4/3 14:07
+ * @Version 1.0
+ */
 @Controller
 public class LoginController implements CommunityConstant {
 

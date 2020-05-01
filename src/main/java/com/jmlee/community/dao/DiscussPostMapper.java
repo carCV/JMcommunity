@@ -15,10 +15,14 @@ public interface DiscussPostMapper {
     // 查询帖子的总条数
     // @Param注解用于给参数取别名
     // 如果只有一个参数，并且会在<if>标签中使用，则必须要加别名
-    Integer selectDiscussPostRows(@Param("userId") int userId);
+    int selectDiscussPostRows(@Param("userId") int userId);
 
+    // 根据id查询帖子
     DiscussPost selectDiscussPostById(int id);
 
-    Integer insertDiscussPost(DiscussPost discussPost);
+    // 新增一条帖子
+    int insertDiscussPost(DiscussPost discussPost);
 
+    // 更新评论数量
+    int updateCommentCount(@Param("id") int id, @Param("commentCount") int commentCount);
 }
