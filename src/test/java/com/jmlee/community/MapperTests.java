@@ -2,9 +2,11 @@ package com.jmlee.community;
 
 import com.jmlee.community.dao.DiscussPostMapper;
 import com.jmlee.community.dao.LoginTicketMapper;
+import com.jmlee.community.dao.MessageMapper;
 import com.jmlee.community.dao.UserMapper;
 import com.jmlee.community.entity.DiscussPost;
 import com.jmlee.community.entity.LoginTicket;
+import com.jmlee.community.entity.Message;
 import com.jmlee.community.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +30,9 @@ public class MapperTests {
 
     @Autowired
     private LoginTicketMapper loginTicketMapper;
+
+    @Autowired
+    private MessageMapper messageMapper;
 
     @Test
     public void testSelectUser() {
@@ -100,6 +105,26 @@ public class MapperTests {
         loginTicketMapper.updateStatus("abc",1);
         loginTicket = loginTicketMapper.selectByTicket("abc");
         System.out.println(loginTicket);
+    }
+
+    @Test
+    public void testSelectLetters() {
+        List<Message> list = messageMapper.selectConversations(111, 0, 20);
+        list.forEach(System.out::println);
+
+
+        int count = messageMapper.selectConversationCount(111);
+        System.out.println(count);
+
+        List<Message> letters = messageMapper.selectLetters("111_112", 0, 10);
+        letters.forEach(System.out::println);
+
+
+        int count2 = messageMapper.selectLetterCount("111_112");
+        System.out.println(count2);
+
+        int count3 = messageMapper.selectLetterUnreadCount(131, "111_131");
+        System.out.println(count3);
     }
 
 }
