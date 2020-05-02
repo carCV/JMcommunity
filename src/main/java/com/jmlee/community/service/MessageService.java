@@ -38,12 +38,15 @@ public class MessageService {
         return messageMapper.selectLetterUnreadCount(userId, conversationId);
     }
 
+
     public int addMessage(Message message) {
+        // 过滤HTML标签和敏感词
         message.setContent(HtmlUtils.htmlEscape(message.getContent()));
         message.setContent(sensitiveFilter.filter(message.getContent()));
         return messageMapper.insertMessage(message);
     }
 
+    // 读取消息（支持一次读取多条消息）
     public int readMessage(List<Integer> ids) {
         return messageMapper.updateStatus(ids, 1);
     }
