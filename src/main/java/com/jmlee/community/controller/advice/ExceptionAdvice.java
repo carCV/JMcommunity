@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
+ * 在表现层统一处理异常
+ *
  * 控制器异常通知类，后面的参数可以限定要扫描的类
  *
  */
