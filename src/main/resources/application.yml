@@ -37,6 +37,11 @@ spring:
         ssl:
           enable: true
 
+  redis:
+    database: 0
+    host: 192.168.96.128
+    port: 6379
+
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
