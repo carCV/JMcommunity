@@ -7,7 +7,6 @@ import com.jmlee.community.service.MessageService;
 import com.jmlee.community.service.UserService;
 import com.jmlee.community.util.CommunityUtil;
 import com.jmlee.community.util.HostHolder;
-import com.jmlee.community.util.SensitiveFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

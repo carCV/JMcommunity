@@ -12,7 +12,7 @@ function follow() {
 		    function(data) {
 		        data = $.parseJSON(data);
 		        if(data.code == 0) {
-                    window.location.reload();
+                    window.location.reload(); // 这里可以优化，无需重新加载全部页面
 		        } else {
                     alert(data.msg);
 		        }

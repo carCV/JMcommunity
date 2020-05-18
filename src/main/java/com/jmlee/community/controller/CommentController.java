@@ -2,7 +2,6 @@ package com.jmlee.community.controller;
 
 import com.jmlee.community.entity.Comment;
 import com.jmlee.community.service.CommentService;
-import com.jmlee.community.util.CommunityConstant;
 import com.jmlee.community.util.HostHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +27,7 @@ public class CommentController {
     @Autowired
     private HostHolder hostHolder;
 
+    // 提交评论
     @RequestMapping(path = "/add/{discussPostId}", method = RequestMethod.POST)
     public String addComment(@PathVariable("discussPostId") int discussPostId, Comment comment) {
 
@@ -37,6 +37,8 @@ public class CommentController {
         comment.setCreateTime(new Date());
 
         commentService.addComment(comment);
+
+
 
         return "redirect:/discuss/detail/" + discussPostId;
     }

@@ -38,8 +38,8 @@ spring:
           enable: true
 
   redis:
-    database: 0
-    host: 192.168.96.128
+    database: 11
+    host: 192.168.96.133
     port: 6379
 
 
