@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Description TODO
+ * @Description test
  * @Author jmlee
  * @Date 2020/5/3 22:20
  * @Version 1.0
@@ -93,8 +93,8 @@ public class RedisTests {
 
     @Test
     public void testKeys() {
-        redisTemplate.delete("user");
-        System.out.println(redisTemplate.hasKey("user"));
+        redisTemplate.delete("test:user");
+        System.out.println(redisTemplate.hasKey("test:user"));
 
         redisTemplate.expire("test:students", 10, TimeUnit.SECONDS);
 

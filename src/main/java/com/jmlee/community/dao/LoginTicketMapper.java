@@ -4,6 +4,7 @@ import com.jmlee.community.entity.LoginTicket;
 import org.apache.ibatis.annotations.*;
 
 @Mapper
+@Deprecated
 public interface LoginTicketMapper {
 
     // 插入登录凭证

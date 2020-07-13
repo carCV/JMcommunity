@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 
+/**
+ * 对带有@LoginRequired注解的方法进行拦截处理
+ */
 @Component
 public class LoginRequiredInterceptor implements HandlerInterceptor {
 

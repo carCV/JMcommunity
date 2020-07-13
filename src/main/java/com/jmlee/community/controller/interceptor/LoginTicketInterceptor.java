@@ -26,10 +26,10 @@ public class LoginTicketInterceptor implements HandlerInterceptor {
     // 在controller被调用之前执行
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        // 从 cookie 中获取凭证
+        // 从cookie中获取凭证
         String ticket = CookieUtil.getValue(request, "ticket");
         if (ticket != null) {
-            // 去数据库查询用户登录凭证
+            // 去数据库查询用户登录凭证(现已改成去Redis中查找凭证，不去数据库查找了)
             LoginTicket loginTicket = userService.findLoginTicket(ticket);
             // 检查凭证是否有效
             if (loginTicket != null && loginTicket.getStatus() == 0 && loginTicket.getExpired().after(new Date())) {
@@ -42,11 +42,11 @@ public class LoginTicketInterceptor implements HandlerInterceptor {
 
             }
         }
-        // 这里记得放行，很容易忽略
+        // 这里记得返回true放行，很容易忽略
         return true;
     }
 
-    // 在controller之后，模板引擎渲染之前调用
+    // 在controller方法调用之后，模板引擎渲染之前调用
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         User user = hostHolder.getUser();

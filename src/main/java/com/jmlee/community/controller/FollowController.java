@@ -1,7 +1,9 @@
 package com.jmlee.community.controller;
 
+import com.jmlee.community.entity.Event;
 import com.jmlee.community.entity.Page;
 import com.jmlee.community.entity.User;
+import com.jmlee.community.event.EventProducer;
 import com.jmlee.community.service.FollowService;
 import com.jmlee.community.service.UserService;
 import com.jmlee.community.util.CommunityConstant;
@@ -19,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description TODO
+ * @Description 关注相关
  * @Author jmlee
  * @Date 2020/5/17 20:12
  * @Version 1.0
@@ -36,6 +38,9 @@ public class FollowController implements CommunityConstant{
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private EventProducer eventProducer;
+
     /**
      * 关注
      * @param entityType
@@ -50,6 +55,15 @@ public class FollowController implements CommunityConstant{
         User user = hostHolder.getUser();
 
         followService.follow(user.getId(), entityType, entityId);
+
+        // 触发关注事件
+        Event event = new Event()
+                .setTopic(TOPIC_FOLLOW)
+                .setUserId(hostHolder.getUser().getId())
+                .setEntityType(entityType)
+                .setEntityId(entityId)
+                .setEntityUserId(entityId);
+        eventProducer.fireEvent(event);
 
         return CommunityUtil.getJSONString(0, "已关注");
     }

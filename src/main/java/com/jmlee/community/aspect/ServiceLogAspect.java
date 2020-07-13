@@ -17,21 +17,26 @@ import java.util.Date;
 /**
  * 统一记录服务层日志切面
  */
-//@Component
-//@Aspect
+@Component
+@Aspect
 public class ServiceLogAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(ServiceLogAspect.class);
 
     @Pointcut("execution(* com.jmlee.community.service.*.*(..))")
     public void pointcut() {
-
+        // 没有方法体，仅作为切入点签名
     }
 
     @Before("pointcut()")
     public void before(JoinPoint joinPoint) {
         // 日志格式：用户[ip:1.2.3.4],在 [xxx] 访问了 [com.jmlee.community.service.xxx()]
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        // 判断当前请求是否通过Controller层去访问Service层（即通过前端页面发起请求，而非后端内部自身的调用，如EventConsumer内部使用了MessageService）
+        if (requestAttributes == null) {
+            //TODO
+            return;
+        }
         HttpServletRequest request = requestAttributes.getRequest();
 
         String ip = request.getRemoteHost();

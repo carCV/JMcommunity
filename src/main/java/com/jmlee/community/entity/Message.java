@@ -3,14 +3,14 @@ package com.jmlee.community.entity;
 import java.util.Date;
 
 /**
- * 消息实体类
+ * 消息实体类：主要包含人与人之间的私信、站内通知等消息
  */
 public class Message {
 
     private int id;
     private int fromId;  // 当fromId=1，表示为系统用户（用于指示系统通知）
     private int toId;
-    private String conversationId;
+    private String conversationId;  // 由fromId_toId拼接而成
     private String content;
     private int status; // 0-未读，1-已读，2-删除
     private Date createTime;

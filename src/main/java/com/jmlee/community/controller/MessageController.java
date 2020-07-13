@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.*;
 
 /**
- * @Description TODO
+ * @Description 消息相关
  * @Author jmlee
  * @Date 2020/5/1 17:05
  * @Version 1.0

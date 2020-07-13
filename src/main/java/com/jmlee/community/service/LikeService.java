@@ -9,7 +9,7 @@ import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.stereotype.Service;
 
 /**
- * @Description TODO
+ * @Description 点赞相关逻辑
  * @Author jmlee
  * @Date 2020/5/16 19:47
  * @Version 1.0

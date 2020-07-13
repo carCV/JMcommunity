@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 /**
- * @Description TODO
+ * @Description 关注相关逻辑
  * @Author jmlee
  * @Date 2020/5/17 19:43
  * @Version 1.0
@@ -31,7 +31,7 @@ public class FollowService implements CommunityConstant {
 
     /**
      * 关注
-     * @param userId
+     * @param userId 关注人的Id
      * @param entityType
      * @param entityId
      */
@@ -58,7 +58,7 @@ public class FollowService implements CommunityConstant {
 
     /**
      * 取消关注
-     * @param userId
+     * @param userId 取消关注人的Id
      * @param entityType
      * @param entityId
      */

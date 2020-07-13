@@ -9,11 +9,11 @@ public class Comment {
 
     private int id;
     private int userId;
-    private int entityType;   // 标识评论类别（如对视频、博文、语音等的评论）
-    private int entityId;  //
-    private int targetId;  // 评论发布的目标（评论发向谁）
-    private String content;  // 评论内容
-    private int status; // 0正常，1非法
+    private int entityType; // 标识评论类别（如对视频、博文、语音等的评论）
+    private int entityId;   //
+    private int targetId;   // 评论发布的目标（评论发向谁）
+    private String content; // 评论内容
+    private int status;     // 0正常，1非法
     private Date createTime;
 
     public int getId() {
