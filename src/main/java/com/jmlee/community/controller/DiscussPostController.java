@@ -1,9 +1,6 @@
 package com.jmlee.community.controller;
 
-import com.jmlee.community.entity.Comment;
-import com.jmlee.community.entity.DiscussPost;
-import com.jmlee.community.entity.Page;
-import com.jmlee.community.entity.User;
+import com.jmlee.community.entity.*;
 import com.jmlee.community.service.CommentService;
 import com.jmlee.community.service.DiscussPostService;
 import com.jmlee.community.service.LikeService;
@@ -188,4 +185,15 @@ public class DiscussPostController implements CommunityConstant {
     }
 
 
+    //TODO 帖子置顶
+//    @RequestMapping(path = "/top", method = RequestMethod.POST)
+//    @ResponseBody
+//    public String setTop(int id){
+//
+//        discussPostService.updateType(id,1);
+//
+//
+//
+//
+//    }
 }

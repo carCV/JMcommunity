@@ -62,7 +62,7 @@ public class LikeController implements CommunityConstant {
         map.put("likeCount", likeCount);
         map.put("likeStatus", likeStatus);
 
-        // 触发点赞事件（只在点赞的时候发送通知，如果取消点赞，则无需发送通知）
+        // 触发点赞事件（只在点赞的时候发送通知，如果是取消点赞，则无需发送通知）
         if (likeStatus == 1) {
             Event event = new Event()
                     .setTopic(TOPIC_LIKE)

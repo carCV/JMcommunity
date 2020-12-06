@@ -19,7 +19,7 @@ public class Event {
         return topic;
     }
 
-    // 这里的setter做了一些改造
+    // 这里的setter做了一些改造，方便链式编程
     public Event setTopic(String topic) {
         this.topic = topic;
         return this;

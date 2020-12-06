@@ -39,11 +39,11 @@ spring:
 
   redis:
     database: 11
-    host: 192.168.96.143
+    host: 192.168.36.160
     port: 6379
 
   kafka:
-    bootstrap-servers: 192.168.96.143:9092
+    bootstrap-servers: 192.168.36.160:9092
     consumer:
       group-id: community-consumer-group
       enable-auto-commit: true
