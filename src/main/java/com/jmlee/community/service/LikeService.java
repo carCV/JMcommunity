@@ -36,7 +36,7 @@ public class LikeService {
                 String entityLikeKey = RedisKeyUtil.getEntityLikeKey(entityType, entityId);
                 String userLikeKey = RedisKeyUtil.getUserLikeKey(entityUserId);
 
-                // 这里需要注意将查询语句写在事务范围之外
+                // 这里需要注意将查询语句写在Redis事务范围之外
                 // 如果用户已点赞某一实体，则set集合中就会存在此userId
                 boolean isMember = operations.opsForSet().isMember(entityLikeKey, userId);
 

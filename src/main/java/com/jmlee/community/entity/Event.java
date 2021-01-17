@@ -13,7 +13,7 @@ public class Event {
     private int entityType;
     private int entityId;
     private int entityUserId;  // 实体拥有者Id
-    private Map<String, Object> data = new HashMap<>();  // 方便后续扩展
+    private Map<String, Object> data = new HashMap<>();  // 设计预留，方便后续扩展
 
     public String getTopic() {
         return topic;

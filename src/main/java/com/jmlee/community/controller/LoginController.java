@@ -151,8 +151,11 @@ public class LoginController implements CommunityConstant {
         int expiredSeconds = (rememberme ? REMEMBER_EXPIRED_SECONDS : DEFAULT_EXPIRED_SECONDS);
         Map<String, Object> map = userService.login(username, password, expiredSeconds);
         if (map.containsKey("ticket")) {
+            // 一旦登录成功后才生成登录凭证，并保存到浏览器Cookie中
             Cookie cookie = new Cookie("ticket", map.get("ticket").toString());
+            // 设置Cookie的有效范围
             cookie.setPath(contextPath);
+            // 设置Cookie的有效时间
             cookie.setMaxAge(expiredSeconds);
             response.addCookie(cookie);
             return "redirect:/index";
@@ -178,7 +181,7 @@ public class LoginController implements CommunityConstant {
         // 将验证码存入session
         //session.setAttribute("kaptcha",text);
 
-        // 验证码的归属
+        // 验证码的归属者
         String kaptchaOwner = CommunityUtil.generateUUID();
         Cookie cookie = new Cookie("kaptchaOwner", kaptchaOwner);
         cookie.setMaxAge(60);
@@ -192,8 +195,8 @@ public class LoginController implements CommunityConstant {
         // 将图片输出给浏览器
         response.setContentType("image/png");
         try {
-            OutputStream os = response.getOutputStream();
-            ImageIO.write(image,"png",os);
+            OutputStream out = response.getOutputStream();
+            ImageIO.write(image,"png",out);
         } catch (IOException e) {
             logger.error("响应验证码失败：",e.getMessage());
         }

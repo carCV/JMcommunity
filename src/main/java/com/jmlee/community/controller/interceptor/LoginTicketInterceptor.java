@@ -55,7 +55,7 @@ public class LoginTicketInterceptor implements HandlerInterceptor {
 
             }
         }
-        // 这里记得返回true放行，很容易忽略
+        // 用户未登录，这里记得返回true放行，很容易忽略
         return true;
     }
 

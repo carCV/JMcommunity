@@ -161,6 +161,7 @@ public class UserService implements CommunityConstant {
 
         // 验证状态
         User user = userMapper.selectByName(username);
+
         if (user == null) {
             map.put("usernameMsg","该账号不存在！");
             return map;
@@ -200,7 +201,7 @@ public class UserService implements CommunityConstant {
      * 退出登录-修改登录凭证
      * @param ticket
      */
-    public void logout(String ticket) {
+    public void  logout(String ticket) {
         // status-1:表示无效
 //        loginTicketMapper.updateStatus(ticket,1);
 
@@ -246,6 +247,7 @@ public class UserService implements CommunityConstant {
     public User findUserByUsername(String username) {
         return userMapper.selectByName(username);
     }
+
 
 
     // 1.优先从缓存中取用户数据

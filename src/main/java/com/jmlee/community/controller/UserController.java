@@ -66,7 +66,7 @@ public class UserController implements CommunityConstant {
     }
 
     /**
-     * 账号设置->上传头像（需实现登录才可上传头像，使用@LoginRequired注解标识访问路径的访问权限）
+     * 账号设置->上传头像（需用户登录后才可上传头像，使用@LoginRequired注解标识访问路径的访问权限）
      * @param headerImage
      * @param model
      * @return
