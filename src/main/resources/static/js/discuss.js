@@ -4,6 +4,14 @@ $(function(){
     $("#deleteBtn").click(setDelete);
 });
 
+/**
+ * 点赞
+ * @param btn
+ * @param entityType
+ * @param entityId
+ * @param entityUserId
+ * @param postId
+ */
 function like(btn, entityType, entityId, entityUserId, postId) {
     $.post(
         // 访问路径
@@ -23,7 +31,9 @@ function like(btn, entityType, entityId, entityUserId, postId) {
     );
 }
 
-// 置顶
+/**
+ * 置顶
+ */
 function setTop() {
     $.post(
         CONTEXT_PATH + "/discuss/top",
@@ -39,7 +49,9 @@ function setTop() {
     );
 }
 
-// 加精
+/**
+ * 加精
+ */
 function setWonderful() {
     $.post(
         CONTEXT_PATH + "/discuss/wonderful",
@@ -55,7 +67,9 @@ function setWonderful() {
     );
 }
 
-// 删除
+/**
+ * 删除
+ */
 function setDelete() {
     $.post(
         CONTEXT_PATH + "/discuss/delete",

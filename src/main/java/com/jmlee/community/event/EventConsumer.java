@@ -49,7 +49,7 @@ public class EventConsumer implements CommunityConstant {
         message.setConversationId(event.getTopic());
         message.setCreateTime(new Date());
 
-        // message表中存放的content内容
+        // 对应message表中存放的content内容
         Map<String, Object> content = new HashMap<>();
         content.put("userId", event.getUserId());
         content.put("entityType", event.getEntityType());
@@ -66,7 +66,6 @@ public class EventConsumer implements CommunityConstant {
 
         // 将通知信息保存到数据库中
         messageService.addMessage(message);
-
 
     }
 

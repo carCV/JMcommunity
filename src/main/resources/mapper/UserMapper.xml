@@ -45,11 +45,12 @@
     </select>
 
     <insert id="insertUser" keyColumn="id" keyProperty="id" parameterType="User" useGeneratedKeys="true">
-    insert into user
-        (<include refid="InsertFields"/>)
-    values
+        insert into user
+          (<include refid="InsertFields"/>)
+        values
         (#{username},#{password},#{salt},#{email},#{type},
-         #{status},#{activationCode},#{headerUrl},#{createTime})
+         #{status},#{activationCode},#{headerUrl},#{createTime}
+        )
     </insert>
 
     <update id="updateStatus">
