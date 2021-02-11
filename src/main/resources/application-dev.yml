@@ -41,14 +41,6 @@ spring:
     database: 11
     host: 192.168.36.160
     port: 6379
-    timeout: 10000 # 连接超时时间
-
-    lettuce:
-      pool:
-        max-active: 1024   # 最大连接数，默认是8
-        max-wait: 10000    # 最大连接阻塞等待时间，默认是 -1
-        max-idle: 200      # 最大空闲连接，默认是8
-        min-idle: 5        # 最小空闲连接，默认是0
 
   kafka:
     bootstrap-servers: 192.168.36.160:9092

@@ -49,8 +49,7 @@
           (<include refid="InsertFields"/>)
         values
         (#{username},#{password},#{salt},#{email},#{type},
-         #{status},#{activationCode},#{headerUrl},#{createTime}
-        )
+         #{status},#{activationCode},#{headerUrl},#{createTime})
     </insert>
 
     <update id="updateStatus">
