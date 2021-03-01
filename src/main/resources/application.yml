@@ -7,6 +7,11 @@ spring:
   application:
     name: forum-system
 
+  servlet:
+    multipart:
+      max-file-size: 100MB #单个文件大小
+      max-request-size: 1000MB #设置总上传的数据大小
+
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -25,6 +30,7 @@ spring:
 
   thymeleaf:
     cache: false
+
 
   mail:
     host: smtp.qq.com
@@ -56,6 +62,7 @@ spring:
       group-id: community-consumer-group
       enable-auto-commit: true
       auto-commit-interval: 3000ms
+
 
 
 mybatis:

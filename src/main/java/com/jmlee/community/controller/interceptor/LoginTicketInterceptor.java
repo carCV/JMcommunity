@@ -31,8 +31,10 @@ public class LoginTicketInterceptor implements HandlerInterceptor {
     // 在controller被调用之前执行
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
         // 从cookie中获取凭证
         String ticket = CookieUtil.getValue(request, "ticket");
+
         if (ticket != null) {
             // 去数据库查询用户登录凭证(现已改成去Redis中查找凭证，不去数据库查找了)
             LoginTicket loginTicket = userService.findLoginTicket(ticket);
@@ -70,6 +72,7 @@ public class LoginTicketInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        // 手动清空ThreadLocal内部数据，防止内存泄露
         hostHolder.clear();
         SecurityContextHolder.clearContext();
     }

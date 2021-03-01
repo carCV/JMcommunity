@@ -129,7 +129,7 @@ public class UserService implements CommunityConstant {
         } else if (code.equals(user.getActivationCode())) {
 
             userMapper.updateStatus(userId,1);
-            // 这里用户信息发送变化，直接删除缓存中的用户数据
+            // 这里用户信息发生变化，直接删除缓存中的用户数据
             clearCache(userId);
 
             return ACTIVATION_SUCCESS;
@@ -201,7 +201,7 @@ public class UserService implements CommunityConstant {
      * 退出登录-修改登录凭证
      * @param ticket
      */
-    public void  logout(String ticket) {
+    public void logout(String ticket) {
         // status-1:表示无效
 //        loginTicketMapper.updateStatus(ticket,1);
 

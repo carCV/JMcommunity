@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
         http.authorizeRequests()
                 .antMatchers(
                         "/user/setting",
-                        "user/upload",
+                        "/user/upload",
                         "discuss/add",
                         "/comment/add/**",
                         "letter/**",
@@ -67,7 +67,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
                             response.setContentType("application/plain;charset=utf-8");
                             PrintWriter writer = response.getWriter();
                             writer.write(CommunityUtil.getJSONString(403,"你还没有登录哦！"));
-
                         }
                         //同步请求的处理
                         else {
@@ -98,7 +97,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
         // Security底层默认会拦截/logout请求，进行退出处理，
         // 我们需要覆盖他的默认逻辑，才能执行我们自己的退出代码
         http.logout().logoutUrl("/securitylogout");
-
 
 
     }
