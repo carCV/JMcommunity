@@ -24,9 +24,7 @@ public class ServiceLogAspect {
     private static final Logger logger = LoggerFactory.getLogger(ServiceLogAspect.class);
 
     @Pointcut("execution(* com.jmlee.community.service.*.*(..))")
-    public void pointcut() {
-        // 没有方法体，仅作为切入点签名
-    }
+    public void pointcut() { }
 
     @Before("pointcut()")
     public void before(JoinPoint joinPoint) {

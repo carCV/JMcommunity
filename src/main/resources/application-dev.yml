@@ -10,7 +10,7 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.96.138:3306/community?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://192.168.138.138:3306/community?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: 123456&
     hikari:
@@ -39,11 +39,11 @@ spring:
 
   redis:
     database: 11
-    host: 192.168.36.160
+    host: 192.168.138.160
     port: 6379
 
   kafka:
-    bootstrap-servers: 192.168.36.160:9092
+    bootstrap-servers: 192.168.138.160:9092
     consumer:
       group-id: community-consumer-group
       enable-auto-commit: true
@@ -75,4 +75,4 @@ logging:
 community:
   path:
     domain: http://localhost:8030
-    upload: F:/Java_Test/data/uploadData
+    upload: D:/Java_Test/data/upload-data

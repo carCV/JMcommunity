@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <contextName>community</contextName>
-    <property name="LOG_PATH" value="F:/Java_Test/data"/>
+    <property name="LOG_PATH" value="D:/Java_Test/data"/>
     <property name="APPDIR" value="community"/>
 
     <!-- error file -->

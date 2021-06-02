@@ -37,9 +37,8 @@ public class RedisConfig {
      */
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
-
         RedisTemplate<String, Object> template = new RedisTemplate<>();
-
+        // redis序列化器
         RedisSerializer<Object> serializer = redisSerializer();
 
         template.setConnectionFactory(factory);
@@ -96,7 +95,6 @@ public class RedisConfig {
                 // 设置 key 和 value 的序列化
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(RedisSerializer.string()))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer()));
-
         return new RedisCacheManager(redisCacheWriter, redisCacheConfiguration);
     }
 
