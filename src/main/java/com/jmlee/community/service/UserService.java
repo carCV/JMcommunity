@@ -95,7 +95,7 @@ public class UserService implements CommunityConstant {
         // 注册用户
         user.setSalt(CommunityUtil.generateUUID().substring(0,5));
         user.setPassword(CommunityUtil.md5(user.getPassword() + user.getSalt()));
-        user.setType(0);   // 0 示普通用户
+        user.setType(0);   // 0示普通用户
         user.setStatus(0);  // 0表示还未激活，1表示已激活
         user.setActivationCode(CommunityUtil.generateUUID());
         // 设置随机头像路径
@@ -192,9 +192,7 @@ public class UserService implements CommunityConstant {
         redisTemplate.opsForValue().set(redisKey, loginTicket);
 
         map.put("ticket",loginTicket.getTicket());
-
         return map;
-
     }
 
     /**
@@ -204,7 +202,6 @@ public class UserService implements CommunityConstant {
     public void logout(String ticket) {
         // status-1:表示无效
 //        loginTicketMapper.updateStatus(ticket,1);
-
         String redisKey = RedisKeyUtil.getTicketKey(ticket);
         LoginTicket loginTicket = (LoginTicket) redisTemplate.opsForValue().get(redisKey);
         loginTicket.setStatus(1);
@@ -218,7 +215,6 @@ public class UserService implements CommunityConstant {
      */
     public LoginTicket findLoginTicket(String ticket) {
 //        return loginTicketMapper.selectByTicket(ticket);
-
         String redisKey = RedisKeyUtil.getTicketKey(ticket);
         return (LoginTicket) redisTemplate.opsForValue().get(redisKey);
     }
@@ -280,11 +276,11 @@ public class UserService implements CommunityConstant {
             public String getAuthority() {
                 switch (user.getType()) {
                     case 1:
-                        return AUTHORITY_ADMIN;
+                        return AUTHORITY_ADMIN; // 管理员
                     case 2:
-                        return AUTHORITY_MODERATOR;
+                        return AUTHORITY_MODERATOR; // 版主
                     default:
-                        return AUTHORITY_USER;
+                        return AUTHORITY_USER; // 普通用户
                 }
             }
         });

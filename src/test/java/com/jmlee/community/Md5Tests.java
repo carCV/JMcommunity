@@ -17,4 +17,11 @@ public class Md5Tests {
         System.out.println(s);
 
     }
+
+    @Test
+    public void testMd5withSalt() {
+
+        String passwd = CommunityUtil.md5("123456" + "e0b70");
+        System.out.println(passwd);
+    }
 }

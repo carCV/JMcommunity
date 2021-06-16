@@ -1,6 +1,5 @@
 package com.jmlee.community.config;
 
-import com.jmlee.community.controller.interceptor.LoginRequiredInterceptor;
 import com.jmlee.community.controller.interceptor.LoginTicketInterceptor;
 import com.jmlee.community.controller.interceptor.MessageInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;

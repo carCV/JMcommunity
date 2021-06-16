@@ -5,7 +5,8 @@ import org.apache.kafka.common.protocol.types.Field;
 import javax.xml.transform.sax.SAXTransformerFactory;
 
 /**
- * 定义一个常量接口
+ * 常量接口
+ * @author jmLee
  */
 public interface CommunityConstant {
     /**

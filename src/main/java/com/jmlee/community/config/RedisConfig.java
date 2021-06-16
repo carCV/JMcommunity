@@ -18,7 +18,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import java.time.Duration;
 
 /**
- * @Description TODO
+ * @Description
  * @Author jmlee
  * @Date 2020/5/3 22:11
  * @Version 1.0

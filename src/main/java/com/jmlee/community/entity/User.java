@@ -10,7 +10,7 @@ public class User {
     private int id;
     private String username;
     private String password;
-    private String salt;
+    private String salt; // 加盐处理
     private String email;
     private int type;  // 账户类型
     private int status;  // 账户激活状态，0表示未激活，1表示激活

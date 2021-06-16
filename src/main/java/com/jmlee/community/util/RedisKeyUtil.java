@@ -2,6 +2,7 @@ package com.jmlee.community.util;
 
 /**
  * Redis Key工具类，统一规划所需的Redis Key
+ * @author jmLee
  */
 public class RedisKeyUtil {
 

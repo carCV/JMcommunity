@@ -68,7 +68,6 @@ public class DiscussPostController implements CommunityConstant {
         post.setTitle(title);
         post.setContent(content);
         post.setCreateTime(new Date());
-
         discussPostService.addDiscussPost(post);
 
         // 计算帖子分数
@@ -77,7 +76,6 @@ public class DiscussPostController implements CommunityConstant {
 
         // 程序报错的情况，将由ExceptionAdvice类统一处理
         return CommunityUtil.getJSONString(0,"发布成功！");
-
     }
 
     /**
@@ -104,7 +102,6 @@ public class DiscussPostController implements CommunityConstant {
                 likeService.findEntityLikeStatus(hostHolder.getUser().getId(), ENTITY_TYPE_POST, discussPostId);
         model.addAttribute("likeStatus", likeStatus);
 
-
         // 评论分页信息
         page.setLimit(5);
         page.setPath("/discuss/detail/" + discussPostId);
@@ -112,7 +109,6 @@ public class DiscussPostController implements CommunityConstant {
 
         // 评论：给帖子的评论
         // 回复：给评论的评论
-
         // 评论列表
         List<Comment> commentList = commentService.findCommentByEntity(
                 ENTITY_TYPE_POST, post.getId(), page.getOffset(), page.getLimit());
@@ -123,7 +119,6 @@ public class DiscussPostController implements CommunityConstant {
             for (Comment comment : commentList) {
                 // 一个评论VO
                 Map<String, Object> commentVo = new HashMap<>();
-
                 // 评论
                 commentVo.put("comment", comment);
                 // 作者
@@ -164,7 +159,6 @@ public class DiscussPostController implements CommunityConstant {
                         likeStatus = hostHolder.getUser() == null ? 0 :
                                 likeService.findEntityLikeStatus(hostHolder.getUser().getId(), ENTITY_TYPE_COMMENT, reply.getId());
                         replyVo.put("likeStatus", likeStatus);
-
                         replyVoList.add(replyVo);
                     }
                 }
@@ -178,22 +172,19 @@ public class DiscussPostController implements CommunityConstant {
             }
 
         }
-
         model.addAttribute("comments", commentVoList);
-
         return "/site/discuss-detail";
     }
 
 
-    //TODO 帖子置顶
-//    @RequestMapping(path = "/top", method = RequestMethod.POST)
-//    @ResponseBody
-//    public String setTop(int id){
-//
-//        discussPostService.updateType(id,1);
-//
-//
-//
-//
-//    }
+    // TODO 帖子置顶
+    @RequestMapping(path = "/top", method = RequestMethod.POST)
+    @ResponseBody
+    public String setTop(int id){
+
+        discussPostService.updateStatus(id,1);
+
+
+        return null;
+    }
 }

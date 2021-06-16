@@ -2,6 +2,7 @@ package com.jmlee.community.config;
 
 import com.jmlee.community.util.CommunityConstant;
 import com.jmlee.community.util.CommunityUtil;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,11 +24,12 @@ import java.io.PrintWriter;
  * @Date 2020/12/6 1:22
  * @Version 1.0
  */
+@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter implements CommunityConstant {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-
+        // 忽略静态资源的拦截
         web.ignoring().antMatchers("/resources/**");
     }
 
@@ -35,14 +37,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        //授权
+        //授权相关配置
         http.authorizeRequests()
                 .antMatchers(
                         "/user/setting",
                         "/user/upload",
-                        "discuss/add",
+                        "/discuss/add",
                         "/comment/add/**",
-                        "letter/**",
+                        "/letter/**",
                         "/notice/**",
                         "/like",
                         "/follow",
@@ -53,7 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
                         AUTHORITY_MODERATOR)
                 .anyRequest().permitAll()
                 //暂时禁用掉Security的CSRF检查功能
-                .and().csrf().disable();
+                .and()
+                .csrf().disable();
 
         //权限不够时的处理
         http.exceptionHandling()
@@ -85,7 +88,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
                             response.setContentType("application/plain;charset=utf-8");
                             PrintWriter writer = response.getWriter();
                             writer.write(CommunityUtil.getJSONString(403,"你没有访问此功能的权限！"));
-
                         }
                         //同步请求的处理
                         else {
@@ -96,6 +98,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
 
         // Security底层默认会拦截/logout请求，进行退出处理，
         // 我们需要覆盖他的默认逻辑，才能执行我们自己的退出代码
+        // （因为我们的退出路径刚好和Security默认的路径一致，所以只要将其默认的退出的路径改成和我们定义的退出路径不一样，就可以执行我们自己的退出逻辑）
         http.logout().logoutUrl("/securitylogout");
 
 
