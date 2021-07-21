@@ -16,6 +16,7 @@ import java.util.Map;
 
 /**
  * 敏感词过滤工具类（前缀树数据结构）
+ * @author jmLee
  */
 @Component
 public class SensitiveFilter {

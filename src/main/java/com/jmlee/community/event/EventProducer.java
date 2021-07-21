@@ -7,7 +7,8 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 /**
- * @Description 事件生产者
+ * 事件生产者
+ * @author jmLee
  */
 @Component
 public class EventProducer {

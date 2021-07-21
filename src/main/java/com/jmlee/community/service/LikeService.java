@@ -28,7 +28,6 @@ public class LikeService {
      * @param entityUserId 被点赞实体的用户Id
      */
     public void like(int userId, int entityType, int entityId, int entityUserId) {
-
         // Redis事务操作
         redisTemplate.execute(new SessionCallback() {
             @Override
@@ -42,7 +41,6 @@ public class LikeService {
 
                 // 开启事务
                 operations.multi();
-
                 if (isMember) {
                     operations.opsForSet().remove(entityLikeKey, userId);
                     // 被点赞者的总点赞数减一
@@ -51,7 +49,6 @@ public class LikeService {
                     operations.opsForSet().add(entityLikeKey, userId);
                     operations.opsForValue().increment(userLikeKey);
                 }
-
                 // 提交事务
                 return operations.exec();
             }

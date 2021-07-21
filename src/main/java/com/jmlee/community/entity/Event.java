@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Description 封装触发事件
+ * 封装触发事件
+ * @author jmLee
  */
 public class Event {
 

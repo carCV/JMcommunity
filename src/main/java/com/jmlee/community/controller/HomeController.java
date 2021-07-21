@@ -47,14 +47,13 @@ public class HomeController implements CommunityConstant {
     @RequestMapping(path = "/index", method = RequestMethod.GET)
     public String getIndexPage(Model model, Page page) {
         // controller方法调用前，SpringMVC会自动帮我们实例化Model和Page对象，并将Page注入给Model
-        // 所以在 thymeleaf中可以直接访问Page对象中的数据
+        // 所以在thymeleaf中可以直接访问Page对象中的数据
 
         // 查询总帖子记录数
         page.setRows(discussPostService.findDiscussPostRows(0));
         page.setPath("/index");
 
         List<DiscussPost> list = discussPostService.findDiscussPost(0, page.getOffset(), page.getLimit());
-
         List<Map<String, Object>> discussPosts = new ArrayList<>();
 
         if (list != null) {
@@ -71,9 +70,7 @@ public class HomeController implements CommunityConstant {
                 discussPosts.add(map);
             }
         }
-
         model.addAttribute("discussPosts",discussPosts);
-
 
         // 当引入thymeleaf的jar包时，默认的静态根目录变成了templates
         return "/index";

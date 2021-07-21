@@ -7,6 +7,9 @@ import org.springframework.util.DigestUtils;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * @author jmLee
+ */
 public class CommunityUtil {
 
     // 生成随机字符串

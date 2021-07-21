@@ -4,6 +4,7 @@ import java.util.Date;
 
 /**
  * 消息实体类：主要包含人与人之间的私信、站内通知等消息
+ * @author jmLee
  */
 public class Message {
 

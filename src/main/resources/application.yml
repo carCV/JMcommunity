@@ -9,15 +9,15 @@ spring:
 
   servlet:
     multipart:
-      max-file-size: 100MB #单个文件大小
+      max-file-size: 100MB #设置单个文件大小
       max-request-size: 1000MB #设置总上传的数据大小
 
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://192.168.138.160:3306/community?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    username: root
-    password: 123456
+    username: ENC(9nktMQVh0Q+NNy9JF9r7+w==)
+    password: ENC(/ND6+2HL7chivf0BuFLQUw==)
     hikari:
       minimum-idle: 5
       idle-timeout: 600000
@@ -32,11 +32,12 @@ spring:
     cache: false
 
 
+
   mail:
     host: smtp.qq.com
     port: 465
-    username: 2607687789@qq.com  # 最后提交需修改账号
-    password: vjzleujgzfhmeceg
+    username: ENC(YEqqLDpPxtkhp1C+P4vansSfmtEmF9UX+seZVAN5qR8=)
+    password: ENC(a0fxz0uyWuz2oNGz6UVFLld8A7YUg0KJGtGbEd8xLec=)
     protocol: smtps
     properties:
       smtp:
@@ -48,7 +49,6 @@ spring:
     host: 192.168.138.160
     port: 6379
     timeout: 10000 # 连接超时时间
-
     lettuce:
       pool:
         max-active: 1024   # 最大连接数，默认是8
@@ -57,13 +57,25 @@ spring:
         min-idle: 5        # 最小空闲连接，默认是0
 
   kafka:
-    bootstrap-servers: 192.168.138.160:9092
+    bootstrap-servers: 192.168.138.160:9092 # 集群环境可配置多个，用逗号隔开
     consumer:
-      group-id: community-consumer-group
+      group-id: community-consumer-group  # 指定一个默认分组
+        # earliest:当各分区下存在已提交的offset时，从提交的offset开始消费；无提交的offset时，从头开始消费
+        # latest:当各分区下存在已提交的offset时，从提交的offset开始消费；无提交的offset时，消费新产生的该分区下的数据
+        # none:topic各分区都存在已提交的offset时，从offset后开始消费；只要有一个分区不存在已提交的offset，则抛出异常
+      auto-offset-reset: earliest
       enable-auto-commit: true
       auto-commit-interval: 3000ms
 
 
+  # 9300端口用于TCP连接，9200端口用于Http连接，后续es7.x已经不支持Tcp的方式进行连接，建议使用rest配置方式
+  data:
+    elasticsearch:
+      cluster-name: my-es-cluster
+      cluster-nodes: 192.168.138.160:9300
+  elasticsearch:
+    rest:
+      uris: 192.168.138.160:9200
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
@@ -72,6 +84,11 @@ mybatis:
     use-generated-keys: true  # 允许JDBC生成主键，默认为false
     map-underscore-to-camel-case: true  # 使用驼峰命名法转换字段，默认为true
 
+jasypt:
+  encryptor:
+    password: jmlee**  # 根密码
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+    algorithm: PBEWithMD5AndDES
 
 
 management:
@@ -83,7 +100,7 @@ management:
 
 logging:
   level:
-    # \u8BBE\u7F6EDao\u5C42\u7684\u65E5\u5FD7\u8F93\u51FA\u7EA7\u522B
+    # dao层日志输出级别，方便打印SQL语句
     com.jmlee.community.dao: debug
 
 # community global settings
@@ -91,3 +108,4 @@ community:
   path:
     domain: http://localhost:8030
     upload: D:/Java_Test/data/upload-data
+

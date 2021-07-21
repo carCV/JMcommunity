@@ -3,6 +3,9 @@ package com.jmlee.community.util;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * @author jmLee
+ */
 public class CookieUtil {
 
     public static String getValue(HttpServletRequest request, String name) {

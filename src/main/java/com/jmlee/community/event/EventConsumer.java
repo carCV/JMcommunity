@@ -17,11 +17,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Description 事件消费者
+ * 事件消费者
+ * @author jmLee
  */
 @Component
 public class EventConsumer implements CommunityConstant {
-
     private static final Logger logger = LoggerFactory.getLogger(EventConsumer.class);
 
     @Autowired
@@ -34,9 +34,7 @@ public class EventConsumer implements CommunityConstant {
             logger.error("消息的内容为空！");
             return;
         }
-
         Event event = JSONObject.parseObject(record.value().toString(), Event.class);
-
         if (event == null) {
             logger.error("消息格式错误！");
             return;
@@ -55,18 +53,15 @@ public class EventConsumer implements CommunityConstant {
         content.put("entityType", event.getEntityType());
         content.put("entityId", event.getEntityId());
 
-
         if (!event.getData().isEmpty()) {
             for (Map.Entry<String, Object> entry : event.getData().entrySet()) {
                 content.put(entry.getKey(), entry.getValue());
             }
         }
-
         message.setContent(JSONObject.toJSONString(content));
 
         // 将通知信息保存到数据库中
         messageService.addMessage(message);
-
     }
 
 

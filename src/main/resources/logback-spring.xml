@@ -4,6 +4,9 @@
     <property name="LOG_PATH" value="D:/Java_Test/data"/>
     <property name="APPDIR" value="community"/>
 
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
     <!-- error file -->
     <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/${APPDIR}/log_error.log</file>
@@ -87,7 +90,7 @@
         <appender-ref ref="FILE_ERROR"/>
         <appender-ref ref="FILE_WARN"/>
         <appender-ref ref="FILE_INFO"/>
-        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="CONSOLE"/>
     </root>
 
 </configuration>

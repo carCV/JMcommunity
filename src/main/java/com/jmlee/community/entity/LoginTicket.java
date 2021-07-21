@@ -4,6 +4,7 @@ import java.util.Date;
 
 /**
  * 登录凭证实体类
+ * @author jmLee
  */
 public class LoginTicket {
     private int id;

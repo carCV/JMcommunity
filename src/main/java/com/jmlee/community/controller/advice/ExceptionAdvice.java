@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 
 /**
  * 全局异常通知类，后面的参数可以限定要扫描的类 --> 在表现层统一处理异常
+ * @author jmLee
  */
 @ControllerAdvice(annotations = Controller.class)
 public class ExceptionAdvice {

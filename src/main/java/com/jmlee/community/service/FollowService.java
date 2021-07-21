@@ -42,7 +42,6 @@ public class FollowService implements CommunityConstant {
 
                 String followeeKey = RedisKeyUtil.getFolloweeKey(userId, entityType);
                 String followerKey = RedisKeyUtil.getFollowerKey(entityType,entityId);
-
                 operations.multi();
 
                 // followee:userId:entityType -> zset(entityId,now)
@@ -69,12 +68,10 @@ public class FollowService implements CommunityConstant {
 
                 String followeeKey = RedisKeyUtil.getFolloweeKey(userId, entityType);
                 String followerKey = RedisKeyUtil.getFollowerKey(entityType,entityId);
-
                 operations.multi();
 
                 operations.opsForZSet().remove(followeeKey, entityId);
                 operations.opsForZSet().remove(followerKey, userId);
-
                 return operations.exec();
             }
         });

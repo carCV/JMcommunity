@@ -2,6 +2,7 @@ package com.jmlee.community.entity;
 
 /**
  * 封装分页相关的信息
+ * @author jmLee
  */
 public class Page {
 

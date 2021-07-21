@@ -7,6 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * 自定义注解（判断某些访问路径是否需要登录才能访问）
+ * @author jmLee
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

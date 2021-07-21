@@ -2,7 +2,6 @@ package com.jmlee.community.controller.interceptor;
 
 import com.jmlee.community.annotation.LoginRequired;
 import com.jmlee.community.util.HostHolder;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -21,6 +20,7 @@ public class LoginRequiredInterceptor implements HandlerInterceptor {
 
     @Autowired
     private HostHolder hostHolder;
+
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

@@ -4,7 +4,8 @@ import com.jmlee.community.entity.User;
 import org.springframework.stereotype.Component;
 
 /**
- * 持有用户信息，用于代替session对象
+ * 持有用户信息，方便进行上下文共享User数据
+ * @author jmLee
  */
 @Component
 public class HostHolder {
